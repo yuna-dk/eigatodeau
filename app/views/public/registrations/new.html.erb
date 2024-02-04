@@ -1,0 +1,46 @@
+<div class="box1">
+  <div class="box-inner">
+    
+    <h2>新規会員登録</h2>
+    
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
+    
+      <div class="box-name">
+        <%= f.label :name %><br>
+        <%= f.text_field :name %>
+      </div>
+    
+      <div class="box-email">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+    
+      <div class="box-password">
+        <div class="a-row">
+          <div class="column-left">
+            <%= f.label :password %>
+          </div>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+        </div>
+        <%= f.password_field :password, autocomplete: "new-password" %>
+      </div>
+    
+      <div class="box-password">
+        <div class="a-row">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+      </div>
+    
+      <div class="box-newusr">
+        <%= f.submit "新規登録" %>
+      </div>
+    <% end %>
+    
+    <%= render "public/shared/links" %>
+    
+  </div>
+</div>

@@ -1,16 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Eigatodeau</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>映画と出会う</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <script src="https://kit.fontawesome.com/5190e400d3.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
+    <header class "shadow-sm">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-danger">
+        <div class="container">
+          <a class="navbar-brand" href="/">
+            <strong><span>Movies</span></strong>
+          </a>
+
+
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto">
+            <% if customer_signed_in? %>
+              <li class="nav-item">
+                <%= link_to '映画投稿フォーム', new_post_movie_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "映画一覧", post_movies_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to 'マイページ', customers_my_page_path(current_customer.id), class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
+            <% elsif admin_signed_in? %>
+              <li class="nav-item">
+                <%= link_to "映画一覧", post_movies_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "会員一覧", admin_customers_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: 'nav-link text-dark' %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "映画一覧", post_movies_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "新規登録", new_customer_registration_path, class: 'nav-link text-dark' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "ログイン", new_customer_session_path, class: 'nav-link text-dark' %>
+              </li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="mb-auto">
     <%= yield %>
+    </main>
+
+    <footer class="bg-danger text-dark pt-2 pb-3">
+      <p class="text-center d-flex align-items-center justify-content-center">©MOVIE／あなたに良い出会いがありますように</p>
+      <p class="bg-dark text-white d-flex align-items-center justify-content-center"><a>Privacy Policy / プライバシーポリシー</a></p>
+    </footer>
+
   </body>
 </html>

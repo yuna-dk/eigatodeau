@@ -1,0 +1,2 @@
+class PostMovie < ApplicationRecord
+end
