@@ -33,7 +33,7 @@ class DeviseCreateCustomers < ActiveRecord::Migration[6.1]
       # t.datetime :locked_at
 
       # 名前を保存するカラム
-      t.string :name
+      t.string :name, null: false
       # 会員ステータス
       t.boolean :is_active, null: false, default: true
 
