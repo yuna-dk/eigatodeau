@@ -28,7 +28,7 @@ class Public::PostMoviesController < ApplicationController
   private
 
   def post_movie_params
-    params.require(:post_movie).permit(:title, :image, :impression)
+    params.require(:post_movie).permit(:title, :image, :impression, :star)
   end
 
 end

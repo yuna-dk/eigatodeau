@@ -75,7 +75,6 @@ ActiveRecord::Schema.define(version: 2024_02_04_061901) do
   end
 
   create_table "post_movies", force: :cascade do |t|
-    t.string "image", null: false
     t.text "impression", null: false
     t.string "star", null: false
     t.string "title", null: false
