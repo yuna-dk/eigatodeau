@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2024_02_04_061901) do
     t.text "impression", null: false
     t.string "star", null: false
     t.string "title", null: false
+    t.integer "customer_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

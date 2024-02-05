@@ -5,7 +5,8 @@ class CreatePostMovies < ActiveRecord::Migration[6.1]
       t.text :impression, null: false
       t.string :star, null: false
       t.string :title, null: false
-      
+      t.integer :customer_id, null: false
+
       t.timestamps
     end
   end
