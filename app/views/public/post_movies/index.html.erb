@@ -18,7 +18,10 @@
             </p>
             <p class="card-text"><i class="fa-light fa-popcorn"></i> <%= post_movie.impression %></p>
             <!--星評価の表示-->
+            <p class="card-text">
             <%= render "public/post_movies/static.rate", post_movie: post_movie %>
+            </p>
+            <spanp>コメント件数:<%= post_movie.post_comments.count %></spanp>
           </div>
         </div>
       </div>

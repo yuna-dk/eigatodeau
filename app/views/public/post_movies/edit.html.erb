@@ -1,2 +1,63 @@
-<h1>Public::PostMovies#edit</h1>
-<p>Find me in app/views/public/post_movies/edit.html.erb</p>
+<div class="container">
+  <div class="row no-gutters">
+    <div class="col-md-5 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+      <h4 class="text-dark bg-light p-4 mb-0">編集画面</h4>
+      <div class="form-body p-4">
+        <!--バリデーションによるエラーメッセージの記述-->
+        <% if @post_movie.errors.any? %>
+          <ul class="alert alert-danger" role="alert">
+            <h6 class="alert-heading">
+              <%= @post_movie.errors.count %>件のエラーが発生しました
+            </h6>
+            <% @post_movie.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
+
+        <%= form_with model: @post_movie, url: post_movie_path(@post_movie.id), method: :patch do |f| %>
+          <h5>画像</h5>
+          <%= f.file_field :image, accept: "image/*", class: "w-100" %>
+          <div class="input-group mb-3 mt-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text" aria-hidden="true"><i class="fas fa-film"></i></span>
+            </div>
+            <%= f.text_field :title, class: "form-control", placeholder: "映画タイトル" %>
+          </div>
+          <%= f.text_area :impression, class: "form-control", rows: "3", placeholder: "感想など" %>
+          <br>
+          
+          <!--starについての記述-->
+          <% if @post_movie.id.nil? %>
+            <div class="form-group" id="star">
+              
+              <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
+              <div id="post_raty"></div>
+            </div>
+            <script>
+              $(document).on('turbolinks:load', function() {
+                let elem = document.querySelector('#post_raty');
+                if (elem == null) return;
+    
+                elem.innerHTML = ""
+                let opt = {
+                  starOn: "<%= asset_path('star-on.png') %>",
+                  starOff: "<%= asset_path('star-off.png') %>",
+                  starHalf: "<%= asset_path('star-half.png') %>",
+                  scoreName: 'post_movie[star]',
+                };
+                raty(elem, opt);
+              });
+            </script>
+          <% else %>
+            <div class="form-group">
+              <%= render "static.rate", post_movie: @post_movie %>
+            </div>
+          <% end %>
+          
+          <%= f.submit '保存', class: "btn btn-lg btn-block btn-info mt-4" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

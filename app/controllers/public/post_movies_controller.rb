@@ -25,6 +25,19 @@ class Public::PostMoviesController < ApplicationController
   end
 
   def edit
+    @post_movie = PostMovie.find(params[:id])
+  end
+  
+  def update
+    post_movie = PostMovie.find(params[:id])
+    post_movie.update(post_movie_params)
+    redirect_to post_movie_path(post_movie.id)  
+  end
+
+  def destroy
+    post_movie = PostMovie.find(params[:id])
+    post_movie.destroy
+    redirect_to post_movies_path
   end
 
   # 投稿データのストロングパラメータ

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: "homes#top"
     resources :post_movies do
-      resources :post_comments, only: [:create]
+      resources :post_comments, only: [:create, :destroy]
     end
 
     get "customers/my_page" => "customers#show"
