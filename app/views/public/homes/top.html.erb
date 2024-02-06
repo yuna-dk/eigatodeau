@@ -5,12 +5,36 @@
     </h2>
     <h2 class="main-visual-text">
       映画と出会える
-    </h2>      
+    </h2>
   </div>
 </div>
 
 <div class="d-flex flex-row">
   <div class="p-5">
-    <h2 class="text"><strong>NEW</strong></h2>
+    <h2 class="text"><strong>~ NEW ~</strong></h2>
+  </div>
+</div>
+
+<div class="new-items" style="display: flex; justify-content: space-around; padding: 0 100px;">
+  <% if @post_movies.present? %>
+    <% @post_movies.each do |post_movie| %>
+      <div style="padding: 10px; background-color: #ffffff; flex: 1; margin: 10px;">
+        <img style="width: 100%; height: auto; object-fit: contain; margin-bottom: 10px;">
+        <%= link_to post_movie_path(post_movie.id) do %>
+          <%= image_tag post_movie.get_image(300,300) %>
+          <h5 class="top-postmovie" style="margin: 0; padding: 0;"><%= post_movie.title %></h5>
+        <% end %>
+        <!--星評価の表示-->
+        <%= render "public/post_movies/static.rate", post_movie: post_movie %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>投稿がありません</p>
+  <% end %>
+</div>
+
+<div class="d-flex flex-row-reverse">
+  <div class="p-5">
+    <p style="text-align: right;"><%= link_to 'すべての映画を見る＞',  post_movies_path %></p>
   </div>
 </div>

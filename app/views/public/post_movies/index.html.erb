@@ -2,7 +2,7 @@
   <% @post_movies.each do |post_movie| %>
     <div class="card w-50 mx-auto mt-4 shadow-lg">
       <%= link_to post_movie_path(post_movie.id) do %>
-        <%= image_tag post_movie.get_image, class: "card-img-top"; %>
+        <%= image_tag post_movie.get_image(500,500), class: "card-img-top"; %>
       <% end %>
 
       <div class="card-body">
