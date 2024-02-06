@@ -1,2 +1,43 @@
-<h1>Public::PostMovies#show</h1>
-<p>Find me in app/views/public/post_movies/show.html.erb</p>
+<div class="card-list-container py-5">
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <%= image_tag @post_movie.get_image, class: "card-img-top"; %>
+
+    <div class="card-body">
+      <div class="row">
+        <div class="col-2">
+          <%= image_tag @post_movie.customer.get_profile_image(100,100), class: "mt-3 rounded-circle"; %>
+        </div>
+        <div class="col-9">
+          <p class="card-title">
+            <strong><i class="fa-sharp fa-solid fa-clapperboard-play"></i><span> <%= @post_movie.title %></span></strong>
+          </p>
+          <p class="card-text"><i class="fa-light fa-popcorn"></i> <%= @post_movie.impression %></p>
+
+          <spanp>コメント件数:<%= @post_movie.post_comments.count %></spanp><br>
+
+          <span><i class="fas fa-user"></i> <%= @post_movie.customer.name %> | </span>
+          <spanp>投稿日：<%= @post_movie.created_at.strftime('%Y/%m/%d') %>
+            <% if @post_movie.customer == current_customer %>
+              <%= link_to "投稿を削除する", post_movie_path(@post_movie), method: :delete, class: "btn btn-outline-danger" %>
+            <% end %>
+          </spanp>
+        </div>
+      </div>
+    </div>
+
+
+  <!--コメントについての記述-->
+  <div id="post_comments">
+    <%= render "public/post_comments/show", { post_movie: @post_movie , post_comment: @post_comment } %>
+  </div>
+
+  <!--コメント投稿フォーム-->
+  <div>
+    <%= form_with model: [@post_movie, @post_comment], local: false do |f| %>
+      <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>
+
+    </div>
+  </div>
