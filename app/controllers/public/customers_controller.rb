@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update]
-
+  
   def show
     @customer = Customer.find(params[:id])
     @post_movies = PostMovie.page(params[:page]).per(6)
