@@ -1,17 +1,17 @@
 class Public::CustomersController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update]
-  
+
   def show
-    @customer = Customer.find(params[:id])
-    @post_movies = PostMovie.page(params[:page]).per(6)
+    @customer = current_customer
+    @post_movies = PostMovie.page(params[:page]).per(3)
   end
 
   def edit
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     @customer.update(customer_params)
     redirect_to customers_my_page_path(@customer.id)
   end
@@ -34,7 +34,7 @@ class Public::CustomersController < ApplicationController
   end
 
   def is_matching_login_customer
-    customer = Customer.find(params[:id])
+    customer = current_customer
     unless customer.id == current_customer.id
       redirect_to post_movies_path
     end
