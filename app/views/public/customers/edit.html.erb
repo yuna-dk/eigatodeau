@@ -1,2 +1,27 @@
-<h1>Public::Customers#edit</h1>
-<p>Find me in app/views/public/customers/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <div class="m-5 w-25 bg-light text-center">
+          <h5>プロフィール編集</h5>
+        </div>
+
+      <%= form_with model: @customer, url: customers_information_path, method: :patch, local: true do |f| %>
+        <table class="table">
+          <tr>
+            <td>名前</td>
+            <td><%= f.text_field :name, autofocus: true, id:"inputName", placeholder:"名前"%></td>
+          </tr>
+          <tr>
+            <td>プロフィール画像</td>
+            <td><%= f.file_field :profile_image, placeholder: "プロフィール画像", accept: "image/*" %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "変更を保存", class: "btn btn-outline-success" %></td>
+            <td><%= link_to "退会する",customers_unsubscribe_path,class: "btn btn-sm btn-danger" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
