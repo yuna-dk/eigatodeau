@@ -8,8 +8,10 @@ class Public::PostMoviesController < ApplicationController
     @post_movie = PostMovie.new(post_movie_params)
     @post_movie.customer_id = current_customer.id
     if @post_movie.save
-      redirect_to post_movies_path
+      flash[:notice] = "映画の投稿に成功しました"
+      redirect_to post_movie_path(@post_movie.id)
     else
+      flash.now[:alert] = "映画の投稿に失敗しました"
       render :new
     end
   end
@@ -30,14 +32,24 @@ class Public::PostMoviesController < ApplicationController
 
   def update
     post_movie = PostMovie.find(params[:id])
-    post_movie.update(post_movie_params)
-    redirect_to post_movie_path(post_movie.id)
+    if post_movie.update(post_movie_params)
+      flash[:notice] = "編集を保存しました"
+      redirect_to post_movie_path(post_movie.id)
+    else
+      flash.now[:alert] = "編集の保存に失敗しました"
+      render :edit
+    end
   end
 
   def destroy
     post_movie = PostMovie.find(params[:id])
-    post_movie.destroy
-    redirect_to post_movies_path
+    if post_movie.destroy
+      flash[:notice] = "投稿を削除しました"
+      redirect_to '/post_movies'
+    else
+      flash.now[:alert] = "投稿の削除に失敗しました"
+      render :show
+    end
   end
 
   # 投稿データのストロングパラメータ

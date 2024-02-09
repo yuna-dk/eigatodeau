@@ -12,8 +12,13 @@ class Public::CustomersController < ApplicationController
 
   def update
     @customer = current_customer
-    @customer.update(customer_params)
-    redirect_to customers_my_page_path(@customer.id)
+    if @customer.update(customer_params)
+      flash[:notice] = "編集を保存しました"
+      redirect_to customers_my_page_path(@customer.id)
+    else
+      flash.now[:alert] = "編集の保存に失敗しました"
+      render :edit
+    end
   end
 
   def unsubscribe
