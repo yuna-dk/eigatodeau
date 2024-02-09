@@ -1,6 +1,6 @@
 <div class="card-list-container py-5">
   <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <%= image_tag @post_movie.get_image(500,500) class: "card-img-top"; %>
+    <%= image_tag @post_movie.get_image(500,500), class: "card-img-top"; %>
 
     <div class="card-body">
       <div class="row">
@@ -10,9 +10,9 @@
         </div>
         <div class="col-9">
           <p class="card-title">
-            <strong><i class="fa-sharp fa-solid fa-clapperboard-play"></i><span> <%= @post_movie.title %></span></strong>
+            <strong><i class="fa-sharp fa-solid fa-clapperboard-play"></i><span><%= @post_movie.title %></span></strong>
           </p>
-          <p class="card-text"><i class="fa-light fa-popcorn"></i> <%= @post_movie.impression %></p>
+          <p class="card-text"><i class="fa-light fa-popcorn"></i><%= @post_movie.impression %></p>
           <!--星評価の表示-->
           <%= render "public/post_movies/static.rate", post_movie: @post_movie %>
           <spanp>コメント件数:<%= @post_movie.post_comments.count %></spanp><br>
@@ -31,16 +31,7 @@
     <div id="post_comments">
       <%= render "public/post_comments/show", { post_movie: @post_movie , post_comment: @post_comment } %>
     </div>
-
-    <!--コメント投稿フォーム-->
-    <div>
-      <%= form_with model: [@post_movie, @post_comment], local: false do |f| %>
-        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "w-100", id: "comment_textarea" %>
-        <div class="mx-auto" style="width: 100px;">
-        <%= f.submit "送信する", class: "btn btn-info" %>
-        </div>
-      <% end %>
-    </div>
-
-    </div>
+    
+    
   </div>
+</div>

@@ -27,11 +27,11 @@ class Public::PostMoviesController < ApplicationController
   def edit
     @post_movie = PostMovie.find(params[:id])
   end
-  
+
   def update
     post_movie = PostMovie.find(params[:id])
     post_movie.update(post_movie_params)
-    redirect_to post_movie_path(post_movie.id)  
+    redirect_to post_movie_path(post_movie.id)
   end
 
   def destroy
