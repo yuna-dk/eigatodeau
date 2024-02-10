@@ -27,8 +27,8 @@ class Public::PostMoviesController < ApplicationController
     else
      @post_movies = PostMovie.all
     end
-    
-    @post_movies = PostMovie.page(params[:page]).per(6)
+
+    @post_movies = @post_movies.page(params[:page]).per(6)
   end
 
   def show

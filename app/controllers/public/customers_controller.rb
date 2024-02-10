@@ -3,7 +3,7 @@ class Public::CustomersController < ApplicationController
 
   def show
     @customer = current_customer
-    @post_movies = PostMovie.page(params[:page]).per(3)
+    @post_movies = @customer.post_movies.page(params[:page]).per(3)
   end
 
   def edit
