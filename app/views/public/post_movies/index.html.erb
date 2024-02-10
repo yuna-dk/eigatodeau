@@ -1,3 +1,9 @@
+<p class="category">
+  <%= link_to '新しい順', post_movies_path(latest: "true") %>
+  |<%= link_to '古い順', post_movies_path(old: "true") %>
+  |<%= link_to '評価の高い順', post_movies_path(star_count: "true") %>
+</p>
+
 <div class="card-list-container py-5">
   <% @post_movies.each do |post_movie| %>
     <div class="card w-50 mx-auto mt-4 shadow-lg">
@@ -21,7 +27,8 @@
             <p class="card-text">
             <%= render "public/post_movies/static.rate", post_movie: post_movie %>
             </p>
-            <spanp>コメント件数:<%= post_movie.post_comments.count %></spanp>
+            <spanp>投稿日：<%= l post_movie.created_at %></spanp>
+            <spanp> | コメント件数:<%= post_movie.post_comments.count %></spanp>
           </div>
         </div>
       </div>

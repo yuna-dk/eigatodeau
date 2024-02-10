@@ -5,15 +5,12 @@ class PostMovie < ApplicationRecord
 
   validates :title, presence: true
   validates :image, presence: true
-  validates :impression, presence: true
+  validates :impression, presence: true,length:{maximum:200}
 
-  def get_image
-    if image.attached?
-      image
-    else
-      'no_image.jpg'
-    end
-  end
+  # 絞り込み機能
+  scope :latest, -> {order(created_at: :desc)}
+  scope :old, -> {order(created_at: :asc)}
+  scope :star_count, -> {order(star: :desc)}
 
   def get_image(width,height)
     unless image.attached?
