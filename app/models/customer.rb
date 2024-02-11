@@ -31,13 +31,13 @@ class Customer < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
-  # GUEST_CUSTOMER_EMAIL = "guest@guest"
+  GUEST_CUSTOMER_EMAIL = "guest@guest"
 
-  #   def self.guest
-  #   find_or_create_by!(email: GUEST_CUSTOMER_EMAIL) do |customer|
-  #     customer.password = SecureRandom.urlsafe_base64
-  #     customer.name = "guestcustomer"
-  #   end
-  #   end
+    def self.guest
+    find_or_create_by!(email: GUEST_CUSTOMER_EMAIL) do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.name = "guestcustomer"
+    end
+    end
 
 end

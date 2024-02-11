@@ -1,8 +1,14 @@
 class Public::CustomersController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update]
-
-  def show
+  
+  def mypage
     @customer = current_customer
+    @post_movies = @customer.post_movies.page(params[:page]).per(3)
+    render :show
+  end
+  
+  def show
+    @customer = Customer.find(params[:id])
     @post_movies = @customer.post_movies.page(params[:page]).per(3)
   end
 

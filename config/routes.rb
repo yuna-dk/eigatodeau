@@ -5,9 +5,9 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: "public/sessions"
   }
-  # devise_scope :customers do
-  #   post "customers/guest_sign_in", to: "public/sessions#guest_sign_in"
-  # end
+  devise_scope :customer do
+    post "customers/guest_sign_in", to: "public/sessions#guest_sign_in"
+  end
 
   # 管理者
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
@@ -21,7 +21,8 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
     end
 
-    get "customers/my_page" => "customers#show"
+    get "customers/my_page" => "customers#mypage", as: "mypage"
+    get "customers/:id/show" => "customers#show", as: "customerpage"
     get "costomers/infomation/edit" => "customers#edit"
     patch "customers/information" => "customers#update"
     get "customers/unsubscribe" => "customers#unsubscribe"

@@ -3,25 +3,58 @@
 <table class="table table-hover table-inverse">
   <!--検索対象モデルがCustomerの時 -->
   <% if @range == "Customer" %>
-  <h2>Customers search for "<%= @word %>"</h2>
+  <h2>検索ワード "<%= @word %>"</h2>
     <tbody>
       <% @customers.each do |customer| %>
         <tr>
-          <td><%= image_tag customer.get_profile_image(50,50) %></td>
-          <td><%= customer.name %></td>
+          <td>
+            <%= link_to customerpage_path(customer.id) do %>
+              <%= image_tag customer.get_profile_image(50,50) %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to customerpage_path(customer.id) do %>
+              <%= customer.name %>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>
   <% else %>
     <!--検索対象モデルがPostMovieの時 -->
-    <h2>PostMovies search for "<%= @word %>"</h2>
-    <tbody>
+    <h2>検索ワード "<%= @word %>"</h2>
+    <div class="card-list-container py-5">
       <% @post_movies.each do |post_movie| %>
-        <tr>
-          <td><%= post_movie.title %></td>
-          <td><%= render "public/post_movies/static.rate", post_movie: post_movie %></td>
-        </tr>
+        <div class="card w-50 mx-auto mt-4 shadow-lg">
+          <%= link_to post_movie_path(post_movie.id) do %>
+            <%= image_tag post_movie.get_image(500,500), class: "card-img-top"; %>
+          <% end %>
+    
+          <div class="card-body">
+            <div class="row">
+              <div class="col-2">
+                <%= image_tag post_movie.customer.get_profile_image(100,100), class: "mt-3 rounded-circle"; %>
+              </div>
+              <div class="col-10">
+                <p class="card-title">
+                  <%= link_to(post_movie_path(post_movie.id), class: "text-dark") do %>
+                    <strong><i class="fa-sharp fa-solid fa-clapperboard-play"></i><span> <%= post_movie.title %></span></strong>
+                  <% end %>
+                </p>
+                <p class="card-text"><i class="fa-light fa-popcorn"></i> <%= post_movie.impression %></p>
+                <!--星評価の表示-->
+                <p class="card-text">
+                <%= render "public/post_movies/static.rate", post_movie: post_movie %>
+                </p>
+                <spanp>投稿日：<%= l post_movie.created_at %></spanp>
+                <spanp> | コメント件数:<%= post_movie.post_comments.count %></spanp>
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
-    </tbody>
+      <!--ページャの実装の記述-->
+      <%= paginate @post_movies %>
+    </div>
   <% end %>
 </table>
