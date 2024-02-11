@@ -11,6 +11,21 @@ class PostMovie < ApplicationRecord
   scope :latest, -> {order(created_at: :desc)}
   scope :old, -> {order(created_at: :asc)}
   scope :star_count, -> {order(star: :desc)}
+  
+  # 検索方法分岐
+  def self.looks(search, word)
+    if search == "perfect_match"
+      @post_movie = PostMovie.where("title LIKE?","#{word}")
+    elsif search == "forward_match"
+      @post_movie = PostMovie.where("title LIKE?","#{word}%")
+    elsif search == "backward_match"
+      @post_movie = PostMovie.where("title LIKE?","%#{word}")
+    elsif search == "partial_match"
+      @post_movie = PostMovie.where("title LIKE?","%#{word}%")
+    else
+      @post_movie = PostMovie.all
+    end
+  end
 
   def get_image(width,height)
     unless image.attached?

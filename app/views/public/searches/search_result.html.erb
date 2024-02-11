@@ -1,0 +1,27 @@
+<h2>検索結果</h2>
+
+<table class="table table-hover table-inverse">
+  <!--検索対象モデルがCustomerの時 -->
+  <% if @range == "Customer" %>
+  <h2>Customers search for "<%= @word %>"</h2>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= image_tag customer.get_profile_image(50,50) %></td>
+          <td><%= customer.name %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% else %>
+    <!--検索対象モデルがPostMovieの時 -->
+    <h2>PostMovies search for "<%= @word %>"</h2>
+    <tbody>
+      <% @post_movies.each do |post_movie| %>
+        <tr>
+          <td><%= post_movie.title %></td>
+          <td><%= render "public/post_movies/static.rate", post_movie: post_movie %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>

@@ -3,7 +3,9 @@
   | <%= link_to '古い順', post_movies_path(old: "true") %>
   | <%= link_to '評価の高い順', post_movies_path(star_count: "true") %>
 </p>
-
+<p class="search">
+<%= render 'public/searches/search' %>
+</p>
 <div class="card-list-container py-5">
   <% @post_movies.each do |post_movie| %>
     <div class="card w-50 mx-auto mt-4 shadow-lg">
