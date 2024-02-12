@@ -8,18 +8,18 @@
 
 # 管理者ログイン設定
 Admin.create!(
-   email: 'admin@admin',
-   password: 'testtest'
+  email: 'admin@admin',
+  password: 'testtest'
 )
 
 # タグ検索
 Tag.create([
-    { name: 'アニメ'},
-    { name: 'ホラー'},
-    { name: 'アクション'},
-    { name: 'コメディ'},
-    { name: '恋愛'},
-    { name: 'ファンタジー'},
-    { name: 'キッズ'},
-    { name: 'その他'}
+    { name: 'anime'},
+    { name: 'horror'},
+    { name: 'action'},
+    { name: 'comedy'},
+    { name: 'love'},
+    { name: 'fantasy'},
+    { name: 'kids'},
+    { name: 'others'}
     ])

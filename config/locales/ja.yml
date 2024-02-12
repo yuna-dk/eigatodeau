@@ -2,3 +2,14 @@ ja:
   time:
     formats:
       default: "%Y/%m/%d %H:%M:%S"
+  enums:
+    tag:
+      name:
+        anime: "アニメ"
+        horror: "ホラー"
+        action: "アクション"
+        comedy: "コメディ"
+        love: "恋愛"
+        fantasy: "ファンタジー"
+        kids: "キッズ"
+        others: "その他"
