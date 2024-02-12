@@ -1,2 +1,39 @@
-<h1>Admin::PostMovies#index</h1>
-<p>Find me in app/views/admin/post_movies/index.html.erb</p>
+<p class="category">
+  <%= link_to '新しい順', post_movies_path(latest: "true") %>
+  | <%= link_to '古い順', post_movies_path(old: "true") %>
+  | <%= link_to '評価の高い順', post_movies_path(star_count: "true") %>
+</p>
+
+<div class="card-list-container py-5">
+  <% @post_movies.each do |post_movie| %>
+    <div class="card w-50 mx-auto mt-4 shadow-lg">
+      <%= link_to admin_post_movie_path(post_movie.id) do %>
+        <%= image_tag post_movie.get_image(500,500), class: "card-img-top"; %>
+      <% end %>
+
+      <div class="card-body">
+        <div class="row">
+          <div class="col-2">
+            <%= image_tag post_movie.customer.get_profile_image(100,100), class: "mt-3 rounded-circle"; %>
+          </div>
+          <div class="col-10">
+            <p class="card-title">
+              <%= link_to(post_movie_path(post_movie.id), class: "text-dark") do %>
+                <strong><i class="fa-sharp fa-solid fa-clapperboard-play"></i><span> <%= post_movie.title %></span></strong>
+              <% end %>
+            </p>
+            <p class="card-text"><i class="fa-light fa-popcorn"></i> <%= post_movie.impression %></p>
+            <!--星評価の表示-->
+            <p class="card-text">
+            <%= render "public/post_movies/static.rate", post_movie: post_movie %>
+            </p>
+            <spanp>投稿日：<%= l post_movie.created_at %></spanp>
+            <spanp> | コメント件数:<%= post_movie.post_comments.count %></spanp>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <!--ページャの実装の記述<-->
+  <%= paginate @post_movies %>
+</div>

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-6 m-4">
       <%= form_with model: @customer, url: admin_customer_path, method: :patch do |f| %>
-      <table class="table">
+      <table class="table" style="margin-left: 270px;">
         <tr>
           <th>会員ID</th>
           <td><%= @customer.id %></td>
@@ -19,8 +19,8 @@
       </table>
 
         <div class="field row">
-          <label for="inputStatus" class="col-3 col-form-label">会員ステータス</label>
-          <div class="col-3">
+          <label for="inputStatus" class="col-3 col-form-label" style="margin-left: 470px;">会員ステータス</label>
+          <div class="col-3" style="margin-left: 470px;">
             <%= f.radio_button :is_active, true, id:'inputStatusTrue' %>
             <label for="inputStatusTrue" class="col-form-label">有効</label>
             <%= f.radio_button :is_active, false, id:'inputStatueFalse' %>
@@ -28,7 +28,7 @@
           </div>
         </div>
 
-        <div class="col-3 m-4">
+        <div class="col-3" style="margin-left: 450px;">
           <%= f.submit "変更を保存", class:"btn btn-success" %>
         </div>
       <% end %>

@@ -20,7 +20,7 @@
           <span><i class="fas fa-user"></i> <%= @post_movie.customer.name %> | </span>
           <spanp>投稿日：<%= @post_movie.created_at.strftime('%Y/%m/%d') %>
             <% if @post_movie.customer == current_customer %>
-              <%= link_to "投稿を削除する", post_movie_path(@post_movie), method: :delete, class: "btn btn-outline-danger" %>
+              <%= link_to "投稿を削除する", post_movie_path(@post_movie), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-outline-danger" %>
             <% end %>
           </spanp>
         </div>
@@ -31,5 +31,16 @@
     <div id="post_comments">
       <%= render "public/post_comments/show", { post_movie: @post_movie , post_comment: @post_comment } %>
     </div>
+
+    <!--コメント投稿フォーム-->
+    <div>
+      <%= form_with model: [@post_movie, @post_comment], local: false do |f| %>
+        <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに", class: "w-100", id: "comment_textarea" %>
+        <div class="mx-auto" style="width: 100px;">
+        <%= f.submit "送信する", class: "btn btn-info" %>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

@@ -6,7 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+# 管理者ログイン設定
 Admin.create!(
    email: 'admin@admin',
    password: 'testtest'
 )
+
+# タグ検索
+Tag.create([
+    { name: 'アニメ'},
+    { name: 'ホラー'},
+    { name: 'アクション'},
+    { name: 'コメディ'},
+    { name: '恋愛'},
+    { name: 'ファンタジー'},
+    { name: 'キッズ'},
+    { name: 'その他'}
+    ])
