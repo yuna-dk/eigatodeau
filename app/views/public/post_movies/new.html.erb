@@ -26,11 +26,11 @@
           </div>
           <%= f.text_area :impression, class: "form-control", rows: "3", placeholder: "感想など" %>
           <br>
-          
+
           <!--starについての記述-->
           <% if @post_movie.id.nil? %>
             <div class="form-group" id="star">
-              
+
               <%= f.hidden_field :star, id: :review_star, class: 'form-control' %>
               <div id="post_raty"></div>
             </div>
@@ -38,7 +38,7 @@
               $(document).on('turbolinks:load', function() {
                 let elem = document.querySelector('#post_raty');
                 if (elem == null) return;
-    
+
                 elem.innerHTML = ""
                 let opt = {
                   starOn: "<%= asset_path('star-on.png') %>",
@@ -54,7 +54,20 @@
               <%= render "static.rate", post_movie: post_movie %>
             </div>
           <% end %>
-          
+
+          <!--タグについての記述-->
+          <div class="check_box">
+            <span>タグ</span>
+            <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :to_s_japanese) do |tag| %>
+             <div>
+               <%= tag.label do %>
+                 <%= tag.check_box %>
+                 <%= tag.text %>
+               <% end %>
+             </div>
+            <% end %>
+         </div>
+
           <%= f.submit '投稿', class: "btn btn-lg btn-block btn-info mt-4" %>
         <% end %>
       </div>

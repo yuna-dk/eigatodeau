@@ -3,9 +3,16 @@
   | <%= link_to '古い順', post_movies_path(old: "true") %>
   | <%= link_to '評価の高い順', post_movies_path(star_count: "true") %>
 </p>
+
 <p class="search">
 <%= render 'public/searches/search' %>
 </p>
+
+<!--タグ検索機能-->
+<%= form_tag post_movies_path, method: :get, class: 'boards_searchForm' do %>
+  <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :to_s_japanese, params[:tag_id]), { prompt: 'タグで絞り込み検索', onchange: 'submit(this.form);'} %>
+<% end %>
+
 <div class="card-list-container py-5">
   <% @post_movies.each do |post_movie| %>
     <div class="card w-50 mx-auto mt-4 shadow-lg">
@@ -29,6 +36,11 @@
             <p class="card-text">
             <%= render "public/post_movies/static.rate", post_movie: post_movie %>
             </p>
+            <!--タグの表示-->
+            <% post_movie.tags.each do |tag| %>
+              <%= tag.name %>
+            <% end %>
+
             <spanp>投稿日：<%= l post_movie.created_at %></spanp>
             <spanp> | コメント件数:<%= post_movie.post_comments.count %></spanp>
           </div>

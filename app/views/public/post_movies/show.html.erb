@@ -15,6 +15,11 @@
           <p class="card-text"><i class="fa-light fa-popcorn"></i><%= @post_movie.impression %></p>
           <!--星評価の表示-->
           <%= render "public/post_movies/static.rate", post_movie: @post_movie %>
+          <!--タグの表示-->
+          <% @post_movie.tags.each do |tag| %>
+            <%= tag.name %>
+          <% end %>
+            
           <spanp>コメント件数:<%= @post_movie.post_comments.count %></spanp><br>
 
           <span><i class="fas fa-user"></i> <%= @post_movie.customer.name %> | </span>

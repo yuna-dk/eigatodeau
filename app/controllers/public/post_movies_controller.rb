@@ -4,7 +4,7 @@ class Public::PostMoviesController < ApplicationController
     # if current_customer.nil?
     # redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
     # else
-      
+
     @post_movie = PostMovie.new
     # end
   end
@@ -15,7 +15,7 @@ class Public::PostMoviesController < ApplicationController
     # if current_customer.nil?
     # redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
     # else
-    
+
     @post_movie = PostMovie.new(post_movie_params)
     @post_movie.customer_id = current_customer.id
       if @post_movie.save
@@ -39,7 +39,9 @@ class Public::PostMoviesController < ApplicationController
     else
      @post_movies = PostMovie.all
     end
-
+    # タグ検索機能
+    @post_movies = params[:tag_id].present? ? Tag.find(params[:tag_id]).post_movies : @post_movies
+    # ページネーション
     @post_movies = @post_movies.page(params[:page]).per(6)
   end
 
@@ -78,7 +80,7 @@ class Public::PostMoviesController < ApplicationController
   private
 
   def post_movie_params
-    params.require(:post_movie).permit(:title, :image, :impression, :star)
+    params.require(:post_movie).permit(:title, :image, :impression, :star, :tag_ids)
   end
 
 end
