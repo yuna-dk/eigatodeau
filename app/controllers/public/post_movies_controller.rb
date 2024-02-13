@@ -1,31 +1,34 @@
 class Public::PostMoviesController < ApplicationController
   def new
     # ゲストログインの時は投稿できないようにする
-    # if current_customer.nil?
-    # redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
-    # else
+    if current_customer.nil?
+    redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
+    else
 
     @post_movie = PostMovie.new
-    # end
+    end
   end
 
   # 投稿データの保存
   def create
     # ゲストログインの時は投稿できないようにする
-    # if current_customer.nil?
-    # redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
-    # else
-
+    if current_customer.nil?
+    redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
+    else
+    
     @post_movie = PostMovie.new(post_movie_params)
     @post_movie.customer_id = current_customer.id
       if @post_movie.save
+        params[:post_movie][:tag_ids].each do |tag_id|
+          @post_movie.post_movie_tags.create(tag_id: tag_id)
+        end
         flash[:notice] = "映画の投稿に成功しました"
         redirect_to post_movie_path(@post_movie.id)
       else
         flash.now[:alert] = "映画の投稿に失敗しました"
         render :new
       end
-    # end
+    end
   end
 
   def index
