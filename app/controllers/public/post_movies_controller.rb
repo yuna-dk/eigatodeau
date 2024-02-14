@@ -1,10 +1,9 @@
 class Public::PostMoviesController < ApplicationController
   def new
     # ゲストログインの時は投稿できないようにする
-    if current_customer.nil?
-    redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
+    if current_customer.email == "guest@guest"
+    redirect_to root_path, alert: "投稿するにはログインが必要です"
     else
-
     @post_movie = PostMovie.new
     end
   end
@@ -12,10 +11,10 @@ class Public::PostMoviesController < ApplicationController
   # 投稿データの保存
   def create
     # ゲストログインの時は投稿できないようにする
-    if current_customer.nil?
-    redirect_to new_customer_session_path, alert: "投稿するにはログインが必要です"
+    if current_customer.email == "guest@guest"
+    redirect_to root_path, alert: "投稿するにはログインが必要です"
     else
-    
+
     @post_movie = PostMovie.new(post_movie_params)
     @post_movie.customer_id = current_customer.id
       if @post_movie.save

@@ -21,7 +21,8 @@ class Public::SessionsController < Devise::SessionsController
   # protected
 
   def after_sign_in_path_for(resource)
-     root_path
+    flash[:notice] = "#{current_customer.name}でログインしました"
+    root_path
   end
 
   def guest_sign_in
