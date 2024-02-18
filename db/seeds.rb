@@ -7,10 +7,10 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # 管理者ログイン設定
-Admin.create!(
-  email: 'admin@admin',
-  password: 'testtest'
-)
+Admin.find_or_create_by!(email: 'admin@admin') do |admin|
+  admin.email='admin@admin'
+  admin.password='testtest'
+end
 
 # タグ検索
 Tag.create([
