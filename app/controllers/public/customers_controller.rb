@@ -1,12 +1,12 @@
 class Public::CustomersController < ApplicationController
   before_action :is_matching_login_customer, only: [:edit, :update]
-  
+
   def mypage
     @customer = current_customer
     @post_movies = @customer.post_movies.page(params[:page]).per(3)
     render :show
   end
-  
+
   def show
     @customer = Customer.find(params[:id])
     @post_movies = @customer.post_movies.page(params[:page]).per(3)
@@ -20,7 +20,7 @@ class Public::CustomersController < ApplicationController
     @customer = current_customer
     if @customer.update(customer_params)
       flash[:notice] = "編集を保存しました"
-      redirect_to customers_my_page_path(@customer.id)
+      redirect_to customerpage_path(@customer.id)
     else
       flash.now[:alert] = "編集の保存に失敗しました"
       render :edit

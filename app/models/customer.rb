@@ -31,6 +31,7 @@ class Customer < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
 
+
   GUEST_CUSTOMER_EMAIL = "guest@guest"
 
     def self.guest
