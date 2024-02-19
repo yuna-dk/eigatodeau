@@ -26,6 +26,11 @@ class Public::SessionsController < Devise::SessionsController
     root_path
   end
 
+  def after_sign_out_path_for(resource)
+    flash[:notice] = "ログアウトしました"
+    new_customer_session_path
+  end
+
   # ログイン時に退会済みのユーザーが同じアカウントでログイン出来ないようにする
   def reject_inactive_customer
     @customer = Customer.find_by(email: params[:customer][:email])
