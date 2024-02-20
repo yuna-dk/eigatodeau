@@ -19,6 +19,12 @@ class Public::SessionsController < Devise::SessionsController
   #   super
   # end
 
+  def guest_sign_in
+    customer = Customer.guest
+    sign_in customer
+    redirect_to root_path, notice: "ゲストでログインしました"
+  end
+
   protected
 
   def after_sign_in_path_for(resource)
@@ -40,12 +46,6 @@ class Public::SessionsController < Devise::SessionsController
         redirect_to new_customer_session_path
       end
     end
-  end
-
-  def guest_sign_in
-    customer = Customer.guest
-    sign_in customer
-    redirect_to root_path, notice: "ゲストでログインしました"
   end
 
   # If you have extra params to permit, append them to the sanitizer.

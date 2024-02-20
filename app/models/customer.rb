@@ -1,4 +1,6 @@
 class Customer < ApplicationRecord
+  GUEST_CUSTOMER_EMAIL = "guest@guest"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -24,6 +26,13 @@ class Customer < ApplicationRecord
       @customer = Customer.all
     end
   end
+  
+  def self.guest
+    find_or_create_by!(email: GUEST_CUSTOMER_EMAIL) do |customer|
+      customer.password = SecureRandom.urlsafe_base64
+      customer.name = "guestcustomer"
+    end
+  end
 
   def get_profile_image(width, height)
     unless profile_image.attached?
@@ -32,15 +41,4 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
-
-
-  GUEST_CUSTOMER_EMAIL = "guest@guest"
-
-    def self.guest
-    find_or_create_by!(email: GUEST_CUSTOMER_EMAIL) do |customer|
-      customer.password = SecureRandom.urlsafe_base64
-      customer.name = "guestcustomer"
-    end
-    end
-
 end

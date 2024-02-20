@@ -21,7 +21,7 @@
       <div style="padding: 10px; background-color: #ffffff; flex: 1; margin: 10px;">
         <img style="width: 100%; height: auto; object-fit: contain; margin-bottom: 10px;">
         <%= link_to post_movie_path(post_movie.id) do %>
-          <%= image_tag post_movie.get_image(300,300) %>
+          <%= image_tag post_movie.get_image(300,300), size: "300x300", class: "object-fit-contain" %>
           <h5 class="top-postmovie" style="margin: 0; padding: 0;"><%= post_movie.title %></h5>
         <% end %>
         <!--星評価の表示-->
