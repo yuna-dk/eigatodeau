@@ -18,9 +18,11 @@
           <!--星評価の表示-->
           <%= render "public/post_movies/static.rate", post_movie: @post_movie %>
           <!--タグの表示-->
+          <div>
           <% @post_movie.tags.each do |tag| %>
-            <%= tag.to_s_japanese %>
+            <i class="fa-solid fa-tag"></i><%= tag.to_s_japanese %>
           <% end %>
+          </div>
 
           <spanp>コメント件数:<%= @post_movie.post_comments.count %></spanp><br>
 

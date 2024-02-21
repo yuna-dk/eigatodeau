@@ -48,6 +48,9 @@ class Public::SessionsController < Devise::SessionsController
         flash[:danger] = 'ログインに失敗しました。正しいメールアドレスとパスワードを入力してください。'
         redirect_to new_customer_session_path
       end
+    else
+      flash[:danger] = 'ログインに失敗しました。正しいメールアドレスとパスワードを入力してください。'
+      redirect_to new_customer_session_path
     end
   end
 

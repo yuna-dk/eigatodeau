@@ -10,13 +10,21 @@ class Admin::SessionsController < Devise::SessionsController
 
   # POST /resource/sign_in
   def create
-    @admin = Admin.find_by(email: params[:admin][:email])
-    if @admin
-      if !@admin.valid_password?(params[:admin][:password])
-        flash[:danger] = 'ログインに失敗しました。正しいメールアドレスとパスワードを入力してください。'
-        redirect_to new_admin_session_path
-      end
+  @admin = Admin.find_by(email: params[:admin][:email])
+
+  if @admin
+    if !@admin.valid_password?(params[:admin][:password])
+      flash[:danger] = 'ログインに失敗しました。正しいメールアドレスとパスワードを入力してください。'
+      redirect_to new_admin_session_path
+    else
+      sign_in(@admin)
+      flash[:notice] = '管理者ログインしました'
+      redirect_to admin_root_path
     end
+  else
+    flash[:danger] = 'ログインに失敗しました。正しいメールアドレスとパスワードを入力してください。'
+    redirect_to new_admin_session_path
+  end
   end
 
   # DELETE /resource/sign_out
@@ -27,7 +35,6 @@ class Admin::SessionsController < Devise::SessionsController
   protected
 
   def after_sign_in_path_for(resource)
-    flash[:notice] = "管理者ログインしました"
     admin_root_path
   end
 

@@ -6,7 +6,7 @@
       | <%= link_to '評価の高い順', post_movies_path(star_count: "true") %>
     </p>
   </div>
-  
+
   <div class="col">
     <p class="search">
     <%= render 'public/searches/search' %>
@@ -43,9 +43,11 @@
             <%= render "public/post_movies/static.rate", post_movie: post_movie %>
             </p>
             <!--タグの表示-->
+            <div>
             <% post_movie.tags.each do |tag| %>
-              <%= tag.to_s_japanese %>
+              <i class="fa-solid fa-tag"></i><%= tag.to_s_japanese %>
             <% end %>
+            </div>
 
             <spanp>投稿日：<%= l post_movie.created_at %></spanp>
             <spanp> | コメント件数:<%= post_movie.post_comments.count %></spanp>
