@@ -10,18 +10,33 @@
 
 .box1 {
   width: 350px;
-  height: 500px;
-  margin: 60px auto 0;
+  //height: 500px;
+  margin: 60px auto;
   border-radius: 4px;
   border: 1px #ddd solid;
 }
+
+#error_explanation {
+  width: 350px;
+  margin: 20px auto;
+}
+
+#error_explanation + .box1 {
+  width: 350px;
+  //height: 500px;
+  margin: 0px auto;
+  border-radius: 4px;
+  border: 1px #ddd solid;
+  margin-bottom: 30px;
+}
+
 
 .box-inner {
   padding: 20px 26px;
 }
 
 h2 {
-  font-weight: 400;
+  font-weight: 300px;
   font-size: 28px;
   line-height: 1.2;
   margin-bottom: 10px;
