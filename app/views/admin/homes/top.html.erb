@@ -4,8 +4,8 @@
       <div class="m-4 w-25 bg-light text-center">
         <h2>会員一覧</h2>
       </div>
-    
-      <table class="table"  style="margin-left: 270px;">
+
+      <table class="table">
         <thead>
           <tr>
             <th>会員ID</th>
@@ -36,9 +36,6 @@
         </tbody>
       </table>
     </div>
-      <div class="col d-flex justify-content-center" >
-      <%= paginate @customers %>
-      </div>
-    </div>
   </div>
+  <%= paginate @customers %>
 </div>

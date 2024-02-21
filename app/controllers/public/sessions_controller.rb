@@ -44,6 +44,9 @@ class Public::SessionsController < Devise::SessionsController
       if @customer.valid_password?(params[:customer][:password]) && !@customer.is_active
         flash[:danger] = 'お客様は退会済みです。申し訳ございませんが、別のメールアドレスをお使いください。'
         redirect_to new_customer_session_path
+      elsif !@customer.valid_password?(params[:customer][:password])
+        flash[:danger] = 'ログインに失敗しました。正しいメールアドレスとパスワードを入力してください。'
+        redirect_to new_customer_session_path
       end
     end
   end

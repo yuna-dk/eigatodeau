@@ -1,21 +1,10 @@
 <div class="row">
   <div class="col">
     <p class="category">
-      <%= link_to '新しい順', post_movies_path(latest: "true") %>
-      | <%= link_to '古い順', post_movies_path(old: "true") %>
-      | <%= link_to '評価の高い順', post_movies_path(star_count: "true") %>
+      <%= link_to '新しい順', admin_post_movies_path(latest: "true") %>
+      | <%= link_to '古い順', admin_post_movies_path(old: "true") %>
+      | <%= link_to '評価の高い順', admin_post_movies_path(star_count: "true") %>
     </p>
-  </div>
-  
-  <div class="col">
-    <p class="search">
-    <%= render 'public/searches/search' %>
-    </p>
-
-    <!--タグ検索機能-->
-    <%= form_tag post_movies_path, method: :get, class: 'boards_searchForm' do %>
-      <%= select_tag :tag_id, options_from_collection_for_select(Tag.all, :id, :to_s_japanese, params[:tag_id]), { prompt: 'タグで絞り込み検索', onchange: 'submit(this.form);'} %>
-    <% end %>
   </div>
 </div>
 
