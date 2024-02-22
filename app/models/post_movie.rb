@@ -8,6 +8,7 @@ class PostMovie < ApplicationRecord
   validates :title, presence: true
   validates :image, presence: true
   validates :impression, presence: true,length:{maximum:200}
+  validates :star, presence: true
 
   # 絞り込み機能
   scope :latest, -> {order(created_at: :desc)}

@@ -43,8 +43,18 @@
               <% end %>
             </p>
             <p class="card-text"><i class="fa-light fa-popcorn"></i> <%= post_movie.impression %></p>
-            <span><i class="fas fa-user"></i> <%= post_movie.customer.name %> | </span>
-            <spanp><%= link_to "#{post_movie.post_comments.count} コメント", post_movie_path(post_movie.id), class: "text-dark" %></spanp>
+            <!--星評価の表示-->
+            <p class="card-text">
+            <%= render "public/post_movies/static.rate", post_movie: post_movie %>
+            </p>
+            <!--タグの表示-->
+            <div>
+            <% post_movie.tags.each do |tag| %>
+              <i class="fa-solid fa-tag"></i><%= tag.to_s_japanese %>
+            <% end %>
+            </div>
+            <spanp>投稿日：<%= l post_movie.created_at %></spanp>
+            <spanp> | コメント件数:<%= post_movie.post_comments.count %></spanp>
           </div>
         </div>
       </div>
