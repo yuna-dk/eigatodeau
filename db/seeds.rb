@@ -5,17 +5,16 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 # タグ検索
-Tag.create([
-    { name: 'anime'},
-    { name: 'horror'},
-    { name: 'action'},
-    { name: 'comedy'},
-    { name: 'love'},
-    { name: 'fantasy'},
-    { name: 'kids'},
-    { name: 'others'}
-    ])
+Tag.find_or_create_by!({ name: 'anime' })
+Tag.find_or_create_by!({ name: 'horror' })
+Tag.find_or_create_by!({ name: 'action' })
+Tag.find_or_create_by!({ name: 'comedy' })
+Tag.find_or_create_by!({ name: 'love' })
+Tag.find_or_create_by!({ name: 'fantasy' })
+Tag.find_or_create_by!({ name: 'kids' })
+Tag.find_or_create_by!({ name: 'others' })
 
 
 olivia = Customer.find_or_create_by!(email: "olivia@example.com") do |customer|
@@ -86,6 +85,7 @@ end
 
 record.tags << Tag.where(name: 'horror')
 record.save
+
 
 # 管理者ログイン設定
 Admin.find_or_create_by!(email: 'admin@admin') do |admin|
