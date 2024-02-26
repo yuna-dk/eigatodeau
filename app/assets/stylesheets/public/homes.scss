@@ -39,3 +39,52 @@
   color: black ;
 }
 
+
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width: 425px) {
+  .main-visual {
+    padding-left: 0;
+  }
+
+  .main-visual-content {
+    width: 100%;
+  }
+
+  // トップページ
+  .new-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  padding: 0 10px;
+}
+
+.new-items > div {
+  width: calc(25% - 20px);
+  box-sizing: border-box;
+  margin: 10px;
+  background-color: #ffffff;
+  padding: 10px;
+  text-align: center;
+  display: flex; /* テキストと星を横に配置するために追加 */
+  flex-direction: column; /* 横方向に配置するために追加 */
+  align-items: center; /* 中央揃えにするために追加 */
+}
+
+.new-items img {
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.top-postmovie {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  // white-space: nowrap; /* テキストが折り返されないようにするために追加 */
+}
+
+/* レビューのスタイル（425px以下） */
+.new-items > div {
+  width: calc(100% - 20px);
+ }
+}
