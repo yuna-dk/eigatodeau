@@ -101,3 +101,48 @@
 }
 
 
+/* スマートフォンサイズ（425px）以下の際に適用される設定 */
+@media screen and (max-width: 425px) {
+  .category {
+    margin-left: 50%;
+    transform: translate(-50%, -50%); /*要素自体のサイズを考慮して中央に配置 */
+  }
+
+  .search-box {
+    margin-left: 50%;
+    transform: translate(-40%, -50%); /*要素自体のサイズを考慮して中央に配置 */
+  }
+
+  .boards_searchForm {
+    margin-left: 40%;
+    transform: translate(-50%, -170%); /*要素自体のサイズを考慮して中央に配置 */
+  }
+
+/*一覧ページ*/
+  .card-body .col-2 img {
+    width: 60px;
+    height: auto; /* 高さを自動に設定 */
+  }
+
+  .card-body .col-10 .card-title {
+    margin-left: 30%; /* サイズを適切な値に変更してください */
+  }
+
+  .card-body .col-10 .card-text {
+    margin-left: 30%; /* サイズを適切な値に変更してください */
+  }
+
+  /*詳細ページ*/
+  .card-body .col-2 img {
+    width: 60px;
+    height: auto; /* 高さを自動に設定 */
+  }
+
+  .card-body .col-9 .card-title {
+    margin-left: 30%; /* サイズを適切な値に変更してください */
+  }
+
+  .card-body .col-9 .card-text {
+    margin-left: 30%; /* サイズを適切な値に変更してください */
+  }
+}
