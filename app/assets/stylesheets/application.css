@@ -24,6 +24,10 @@
   background-color: #BB0000;
 }
 
+/*詳細ページ*/
+.comment-message {
+  margin-left: 170px;
+}
 
 /*ページネーション自体のデザイン*/
 .pagination {
@@ -138,11 +142,19 @@
     height: auto; /* 高さを自動に設定 */
   }
 
+  .card-body .col-9 {
+    margin-left: 8%; /* サイズを適切な値に変更してください */
+  }
+
   .card-body .col-9 .card-title {
     margin-left: 30%; /* サイズを適切な値に変更してください */
   }
 
   .card-body .col-9 .card-text {
     margin-left: 30%; /* サイズを適切な値に変更してください */
+  }
+
+  .comment-message {
+    margin-left: 5%;
   }
 }
